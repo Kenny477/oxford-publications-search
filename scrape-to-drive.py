@@ -31,14 +31,14 @@ def download(link):
     parts = link.split('/')
     title = parts[-1]
 
-    if(not os.path.exists('./data/' + title)):
-        wget.download(link, './data/' + title)
+    if(not os.path.exists(path + title)):
+        wget.download(link, path + title)
         f = drive.CreateFile(
             {'parents': [{"kind": "drive#fileLink", 'id': folder}], 'title': title})
         f.SetContentFile(os.path.join(path, title))
         f.Upload()
         f = None
-        os.remove('./data/' + title)
+        os.remove(path + title)
     else:
         print("File exists")
 
